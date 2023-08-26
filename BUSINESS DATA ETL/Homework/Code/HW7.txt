@@ -1,0 +1,37 @@
+Q1
+df_stu = pd.concat([df_stu1,df_stu2],axis=0, ignore_index=True)
+listdf = df_stu.head(5)
+listdf
+
+Q2
+df_stu_grade = df_stu.merge(df_grade, on = 'stu_id', how='inner')
+df_stu_grade_course = df_stu_grade.merge(df_course, on ='course_id', how='inner')
+df_stu_grade_course.drop(['stu_name_y', 'address_y','birthday_y','course_id'], axis=1,inplace=True)
+df_stu_grade_course.columns = ['StuID','StuName','City','Birthday','Grade','CourseName','Format']
+df_stu_grade_course.head(5)
+
+Q3
+df_stu_grade_course.groupby(['StuName'])['Grade'].mean()
+
+Q4
+df_stu_grade_coursechanged =  df_stu_grade_course.astype({'Birthday': 'datetime64'})
+#df_stu_grade_coursechanged.info()
+mask = (df_stu_grade_coursechanged['Birthday'] > '2008-01-01') & (df_stu_grade_coursechanged['Birthday'] <= '2009-12-31')
+df_date = df_stu_grade_course.loc[mask]
+dfg_agg = df_date.loc[:,['StuName','Grade']]
+
+agg_result = dfg_agg.groupby(['StuName']).agg(
+    {        
+        'Grade':['max','min']        
+    }
+)
+
+#agg_result.head(10)
+
+agg_result.columns = ['OnlineMax', 'OnlineMin',]
+agg_result
+
+Q5
+Condition = (df_stu_grade_course['Grade'] <60)
+CourseFails = df_stu_grade_course.loc[Condition, :]
+CourseFails.CourseName.value_counts().sort_index(ascending=True).sort_values(ascending=False)

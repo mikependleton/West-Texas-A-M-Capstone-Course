@@ -1,0 +1,43 @@
+Q1
+
+import yfinance as yf
+# print data in good format
+import pprint as pp
+Get_tickers = ['AAPL','NFLX','MSFT','TWTR']
+dict_data=[]
+for ticker in Get_tickers:
+    if ticker=='AAPL':
+        result = yf.Ticker(ticker).info
+        row_items = [result['longName'], result['sector'], result['longBusinessSummary'],result['website']]
+        print('Full Name:',result['longName'])
+        print('Sector:',result['sector'])
+        print('Business Summary:',result['longBusinessSummary'])
+        print('Website:',result['website'])
+        print('---------------------------')
+    elif ticker=='NFLX':
+        result = yf.Ticker(ticker).info
+        row_items = [result['longName'], result['sector'], result['longBusinessSummary'],result['website']]
+        print('Full Name:',result['longName'])
+        print('Sector:',result['sector'])
+        print('Business Summary:',result['longBusinessSummary'])
+        print('Website:',result['website'])
+        print('---------------------------')
+    elif ticker=='MSFT':
+        result = yf.Ticker(ticker).info
+        row_items = [result['longName'], result['sector'], result['longBusinessSummary'],result['website']]
+        print('Full Name:',result['longName'])
+        print('Sector:',result['sector'])
+        print('Business Summary:',result['longBusinessSummary'])
+        print('Website:',result['website'])
+        print('---------------------------')
+    elif ticker=='TWTR':
+        result = yf.Ticker(ticker).info
+        row_items = [result['longName'], result['sector'], result['longBusinessSummary'],result['website']]
+        print('Full Name:',result['longName'])
+        print('Sector:',result['sector'])
+        print('Business Summary:',result['longBusinessSummary'])
+        print('Website:',result['website'])
+        print('---------------------------')
+
+Q2
+

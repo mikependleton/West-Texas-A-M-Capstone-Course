@@ -1,0 +1,40 @@
+Q1
+import pandas as pd
+
+dfg = pd.read_csv(csv_file)
+dfg.head(5)
+
+Q2
+df2 = dfg.copy()
+# if we make changes on the dataframe like drop a column,
+# it will create a view (a new copy) for the original datafram and make changes on the view
+# the original data will not be changed
+
+df2.drop('_id',axis=1, inplace=True)
+df2.head(5)
+
+Q3
+count_year = df2.loc[:,['Year',]]
+
+count_year.groupby(['Year'])['Year'].value_counts()
+
+Q4
+condition = (df2['Year'] >2007)
+column_names = ['Lead Studio','Audience score %',	'Profitability','Year']
+df_row_col = df2.loc[condition, column_names ]
+df_row_col
+
+Q5
+df_row_col.groupby(['Lead Studio','Year'])['Audience score %'].max()
+
+Q6
+agg_result = df_row_col.groupby(['Lead Studio','Year']).agg(
+    {
+        'Audience score %':'mean',
+        'Profitability':['max','min']
+        
+    }
+)
+
+agg_result.columns = ['AudiMean', 'ProfMax','ProfMin']
+agg_result

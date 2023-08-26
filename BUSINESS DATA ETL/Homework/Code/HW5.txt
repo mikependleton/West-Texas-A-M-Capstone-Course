@@ -1,0 +1,31 @@
+Q1
+
+import pandas as pd
+
+csv_df = pd.read_csv(csv_file,names=['_id','Film','Genre',	'Lead Studio',	'Audience score %',	'Profitability',	'Rotten Tomatoes %',	'Worldwide Gross',	'Year'])
+csv_df.head(4)
+
+Q2
+
+del_col = csv_df.drop(['_id','Profitability'],axis=1)
+del_col.head(4)
+
+Q3
+
+del_col.info()
+
+Q4
+
+del_col.sort_values(['Film','Lead Studio'],ascending=True)
+
+Q5
+
+condition = (del_col['Audience score %']<60) | (del_col['Rotten Tomatoes %']>79)
+result = del_col[condition]
+result2=result.loc[:, ["Film","Audience score %","Rotten Tomatoes %"]]
+result2
+
+Q6
+
+del_idx = result2.drop([5],axis=0)
+del_idx

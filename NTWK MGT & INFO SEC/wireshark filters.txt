@@ -1,0 +1,9 @@
+ip.dst_host == <ipaddr>
+
+frame contains "filename" {when looking for an .msi or other file in the transmission}
+
+tcp.port == 443 || udp.port == 443
+
+certificate hello requet : tls.handshake.type == 11
+
+

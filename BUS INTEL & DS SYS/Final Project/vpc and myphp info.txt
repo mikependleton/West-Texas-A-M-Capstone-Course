@@ -1,0 +1,12 @@
+Hostname: vps-830c6ca1
+Ip: 51.81.32.8
+
+User Name: example_user and root for database connection. The password for both these accounts is Vcj6BvPRmWuV!!
+ubuntu is the non su account for the os. Password for this account is Vcj6BvPRmWuV
+
+If accessing the os via cli, then log in with ubuntu, and su up to root.
+
+url for phpmyadmin:
+https://www.pentechnologys.com/phpmyadmin
+
+You can use root or example_user

@@ -1,0 +1,85 @@
+Q1
+
+secondline = open('HW2.txt')
+read = secondline.readlines()
+secondline.close()
+#for line in read:
+print(read[1])
+
+Q2
+
+import json
+
+with open('HW2.json') as f:
+  data = json.load(f)
+
+for element in data:
+  if int(element['Year'])>=2010:
+    print(f"Movie: {element['Film']}") 
+    print(f"Audience score of: {element['Audience score %']}")
+    print("-----------")
+
+if get_ticker = ['MSFT'] 
+
+Q3
+
+# ------Put your answer below this line-----
+
+import mysql.connector
+import pandas as pd
+
+# sets up a connection, establishing a session with the MySQL server
+# doc: https://dev.mysql.com/doc/connector-python/en/connector-python-api-mysqlconnection-cursor.html
+
+cnx = mysql.connector.connect(
+    user='cidm6351', # username of database
+    password='dataETL@WT', # password of database
+    host='20.172.0.16', # ip address of the database
+    database='cidm6351', # target database 
+    port=8080 # the default port of MySQL is 3306.     
+    )
+
+# Cursor: is an object that is used to make the connection for executing SQL queries.
+# It is like a bridge between database connection and SQL query.
+# buffered=True: fetches all rows from the server after an operation is executed. 
+# This is useful when queries return small result sets
+cursor = cnx.cursor(buffered=True)
+
+query = "SELECT * FROM patients where gender='female' and birth_date BETWEEN '2000-01-01' AND '2005-12-31' order by birth_date"
+
+df = pd.read_sql(query, cnx)
+
+df
+
+Q4
+
+
+import pymongo
+
+myclient = pymongo.MongoClient("mongodb+srv://cidm6351:cidm6351week3@cluster0.kyufs.azure.mongodb.net/test")
+
+myclient.list_database_names()
+
+db = myclient.cidm6351
+
+movies = db.movie
+
+# build a query to get 1 random sample document from collection
+sample_queue = [{'$sample':{ 'size': 1 }}]
+query_result = db.movie.aggregate(pipeline=sample_queue)
+# save the result into a list, since the query result will disappear after using it once.
+sample_documents = list(query_result)
+query_result.close()
+
+import pprint
+sample_doc = sample_documents[0]
+#pprint.pprint(sample_doc)
+
+# find all movies produced by Disney (Lead Studio is Disney) and Rotten Tomatoes % is over 50, then print out their movie name, Year and Rotten Tomatoes score.
+for movie in movies.find():
+  if movie['Lead Studio'] == "Disney" and movie['Rotten Tomatoes %'] > '50':
+    #print(f"Move: {movie['Film']}\t Year: {movie['Year']}\t Audience Score %:{movie['Rotten Tomatoes %']}")
+    print(f"Move: {movie['Film']}")
+    print(f"Year: {movie['Year']}")
+    print(f"Audience Score %: {movie['Rotten Tomatoes %']}")
+    print('----------')
